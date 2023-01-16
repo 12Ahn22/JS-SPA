@@ -7,7 +7,7 @@ export default class extends AbstractView {
   }
 
   async getHtml() {
-    console.log(this.params.id);
+    console.log(this.params);
     return `
       <h1>Welcome back, Posts</h1>
       <p> Dash Board!</p>
