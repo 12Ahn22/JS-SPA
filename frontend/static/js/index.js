@@ -1,3 +1,7 @@
+import Dashboard from '../views/Dashboard.js';
+import Settings from '../views/Settings.js';
+import Posts from '../views/Posts.js';
+
 // 링크 클릭 시, 실제로 이동하지 않고 이 함수가 실행되야한다.
 const navigateTo = (url) => {
   history.pushState(null, null, url);
@@ -6,9 +10,9 @@ const navigateTo = (url) => {
 
 const router = async () => {
   const routes = [
-    { path: '/', view: () => console.log('Viewing Dashboard') },
-    { path: '/posts', view: () => console.log('Viewing posts') },
-    { path: '/settings', view: () => console.log('Viewing settings') },
+    { path: '/', view: Dashboard },
+    { path: '/posts', view: Settings },
+    { path: '/settings', view: Posts },
   ];
 
   // Test each route for potential match
@@ -27,7 +31,8 @@ const router = async () => {
     };
   }
 
-  match.route.view();
+  const view = new match.route.view();
+  document.querySelector('#app').innerHTML = await view.getHtml();
 };
 
 window.addEventListener('popstate', router);
